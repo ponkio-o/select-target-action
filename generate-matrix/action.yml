@@ -1,0 +1,11 @@
+name: Generate matrix
+description: Generate working directories
+
+inputs:
+  config_file:
+    description: config file path
+    required: true
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

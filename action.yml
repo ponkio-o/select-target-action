@@ -1,0 +1,31 @@
+name: Select target action
+description: Configure the matrix job directory in GitHub Label
+
+inputs:
+  config_file:
+    description: 'config file path'
+    required: false
+    default: '.deploy_target.json'
+  token:
+    default: "${{ github.token }}"
+    required: false
+    description: "GITHUB_TOKEN"
+
+outputs:
+  matrix-workdir:
+    description: "List of working directories"
+    value: ${{ steps.generate_matrix.outputs.work_dirs }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run ci-info
+      uses: ponkio-o/ts-action-tutorial/ci-info@main
+      with:
+        token: ${{ inputs.token }}
+
+    - name: Generate matrix
+      id: generate_matrix
+      uses: ponkio-o/ts-action-tutorial/generate-matrix@main
+      with:
+        config_file: ${{ inputs.config_file }}

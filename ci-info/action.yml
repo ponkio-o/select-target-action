@@ -1,0 +1,26 @@
+name: Run ci-info
+description: Run ci-info
+
+inputs:
+  token:
+    default: "${{ github.token }}"
+    required: false
+    description: "GITHUB_TOKEN"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install ci-info
+      shell: bash
+      run: |
+        CI_INFO_VERSION=2.1.1
+        curl -sSfL -o ci-info.tar.gz https://github.com/suzuki-shunsuke/ci-info/releases/download/v${CI_INFO_VERSION}/ci-info_${CI_INFO_VERSION}_linux_amd64.tar.gz
+        sudo tar -C /usr/bin -xzf ./ci-info.tar.gz
+
+    - name: Run ci-info
+      shell: bash
+      run: |
+        eval $(ci-info run)
+        printf "CI_INFO_TEMP_DIR=%s" $(echo $CI_INFO_TEMP_DIR) >> $GITHUB_ENV
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}

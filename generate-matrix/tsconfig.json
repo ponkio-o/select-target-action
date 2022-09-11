@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "moduleResolution": "node",
+    "lib": [
+      "es2021",
+      "esnext.promise",
+      "esnext.weakref"
+    ],
+    "resolveJsonModule": true
+  }
+}
