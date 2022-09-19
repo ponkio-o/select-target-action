@@ -1,5 +1,8 @@
 name: Select target action
 description: Configure the matrix job directory in GitHub Label
+branding:
+  icon: play
+  color: yellow
 
 inputs:
   config_file:
