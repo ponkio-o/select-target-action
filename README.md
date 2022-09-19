@@ -97,7 +97,7 @@ If multiple labels are selected, the values are merged.
 All inputs are optional.
 | Name                 | Description | Default |
 |----------------------|-------------|---------|
-| `config_file` | The json file defined the deploy target |`.deploy_target.json`|
+| `config_file` | Path to configuration file |`.deploy_target.json`|
 | `token`       | `GITHUB_TOKEN` or [PersonalAccessToken(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)|`GITHUB_TOKEN` |
 
 ### Outputs
