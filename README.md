@@ -87,10 +87,10 @@ jobs:
 The directories set in the key of the given label are merged and returned as an array.
 
 ### Deployment
-Deploy to all enviornment.
+Deploy to all enviornment.  
 ![image](./images/deploy_to_all.png)
 
-If multiple labels are selected, the values are merged.
+If multiple labels are selected, the values are merged.  
 ![image](./images/deploy_to_dev_and_stg.png)
 
 ### Inputs
