@@ -6,7 +6,7 @@
   "regexManagers": [
     {
       "fileMatch": [
-        "^action.yml$"
+        "^ci-info\\/action.yml$"
       ],
       "matchStringsStrategy": "any",
       "matchStrings": [
