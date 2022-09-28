@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.3](https://github.com/ponkio-o/select-target-action/compare/v0.1.2...v0.1.3) - 2022-09-28
+- fix: action path by @ponkio-o in https://github.com/ponkio-o/select-target-action/pull/13
+
 ## [v0.1.2](https://github.com/ponkio-o/select-target-action/compare/v0.1.1...v0.1.2) - 2022-09-24
 - Add renovate-config-validator by @ponkio-o in https://github.com/ponkio-o/select-target-action/pull/8
 - Add regexManagers by @ponkio-o in https://github.com/ponkio-o/select-target-action/pull/11
