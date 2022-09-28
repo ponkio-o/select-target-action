@@ -23,12 +23,12 @@ runs:
   using: "composite"
   steps:
     - name: Run ci-info
-      uses: ponkio-o/ts-action-tutorial/ci-info@main
+      uses: ponkio-o/select-target-action/ci-info@main
       with:
         token: ${{ inputs.token }}
 
     - name: Generate matrix
       id: generate_matrix
-      uses: ponkio-o/ts-action-tutorial/generate-matrix@main
+      uses: ponkio-o/select-target-action/generate-matrix@main
       with:
         config_file: ${{ inputs.config_file }}
