@@ -1,5 +1,7 @@
 # Changelog
 
+## [v0.2.1](https://github.com/ponkio-o/select-target-action/compare/v0.2.0...v0.2.1) - 2022-10-22
+
 ## [v0.2.0](https://github.com/ponkio-o/select-target-action/compare/v0.1.3...v0.2.0) - 2022-10-22
 - Update dependency @actions/core to v1.10.0 by @renovate in https://github.com/ponkio-o/select-target-action/pull/15
 
