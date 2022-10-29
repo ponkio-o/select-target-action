@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.2.2](https://github.com/ponkio-o/select-target-action/compare/v0.2.1...v0.2.2) - 2022-10-29
+- Update Node.js to v18.12.0 by @renovate in https://github.com/ponkio-o/select-target-action/pull/22
+
 ## [v0.2.1](https://github.com/ponkio-o/select-target-action/compare/v0.2.0...v0.2.1) - 2022-10-24
 - chore: update @types/node by @ponkio-o in https://github.com/ponkio-o/select-target-action/pull/18
 - fix: paths by @ponkio-o in https://github.com/ponkio-o/select-target-action/pull/21
