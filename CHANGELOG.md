@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.2.3](https://github.com/ponkio-o/select-target-action/compare/v0.2.2...v0.2.3) - 2022-11-01
+- Update dependency @types/node to v18.11.9 by @renovate in https://github.com/ponkio-o/select-target-action/pull/24
+
 ## [v0.2.2](https://github.com/ponkio-o/select-target-action/compare/v0.2.1...v0.2.2) - 2022-10-29
 - Update Node.js to v18.12.0 by @renovate in https://github.com/ponkio-o/select-target-action/pull/22
 
