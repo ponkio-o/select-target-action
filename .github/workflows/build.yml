@@ -26,13 +26,11 @@ jobs:
         with:
           node-version-file: 'generate-matrix/.nvmrc'
 
-      - name: Run npm install
+      - name: Build
         working-directory: generate-matrix
-        run: npm install
-
-      - name: Run ncc build
-        working-directory: generate-matrix
-        run: ncc build src/index.ts
+        run: |
+          npm ci
+          npm run build
 
       - name: Commit
         uses: EndBug/add-and-commit@v9
