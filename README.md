@@ -2,40 +2,54 @@
 Configure the matrix job directory in GitHub Label.
 
 ## Setup
-### GitHub Label
-For example, create the following labels.
-
-- `target:all`
-- `target:develop`
-- `target:staging`
-- `target:production`
-
-https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels#creating-a-label
-
-### Configuration file
+### 1. Create configuration file
 Create a json file in the following format. Specify the label name as key and target directory as value.  
 The config file name or directory can be specified, but `.deploy_target.json` is used by default.
 
 ```json
 {
     "target:develop": [
-        "envs/dev"
+        "envs/development"
     ],
     "target:staging": [
-        "envs/stg"
+        "envs/staging"
     ],
     "target:production": [
-        "envs/prod"
+        "envs/production"
     ],
     "target:all" : [
-        "envs/dev",
-        "envs/stg",
-        "envs/prod"
+        "envs/development",
+        "envs/staging",
+        "envs/production"
     ]
 }
 ```
 
-### Workflow
+### 2. Create GitHub Labels
+#### CUI
+If the `jq` and `gh` commands are installed, the following commands are useful.
+```bash
+export REPO=ponkio-o/select-target-action
+export COLOR=5319E7
+cat .deploy_target.json | jq -r 'keys | .[]' | xargs -I @ gh label create @ --color $COLOR --repo $REPO
+```
+
+ref. https://cli.github.com/manual/gh_label_create
+
+Example
+```console
+$ cat .deploy_target.json | jq -r 'keys | .[]' | xargs -I @ gh label create @ --color $COLOR --repo $REPO
+✓ Label "target:all" created in ponkio-o/select-target-action
+✓ Label "target:develop" created in ponkio-o/select-target-action
+✓ Label "target:production" created in ponkio-o/select-target-action
+✓ Label "target:staging" created in ponkio-o/select-target-action
+```
+
+#### GUI
+Please refer to following doc.  
+https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels#creating-a-label
+
+### 3. Setup Workflow
 GitHub Actions are configured as follows:
 ```yaml
 name: Terraform PR check
@@ -48,6 +62,7 @@ on:
 
 jobs:
   set-matrix:
+    name: Set matrix job
     runs-on: ubuntu-latest
 
     outputs:
@@ -63,7 +78,7 @@ jobs:
 
   plan:
     needs: [set-matrix]
-    name: terraform plan
+    name: Plan
     runs-on: ubuntu-latest
 
     strategy:
@@ -87,11 +102,16 @@ jobs:
 The directories set in the key of the given label are merged and returned as an array.
 
 ### Deployment
-Deploy to all enviornment.  
-![image](./images/deploy_to_all.png)
+Assign a label to the Pull Request. Multiple lables can be assigned.
 
-If multiple labels are selected, the values are merged.  
-![image](./images/deploy_to_dev_and_stg.png)
+#### Example: `target:all`
+![image](./images/deploy_to_all_job.png)
+
+#### Example: `target:develop` & `target:staging`
+![image](./images/deploy_to_dev_and_stg_job.png)
+
+#### Example: `target:all` & `target:staging`
+![image](./images/deploy_to_all_job.png)
 
 ### Inputs
 All inputs are optional.
