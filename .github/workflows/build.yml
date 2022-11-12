@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: ncc build
+
+    steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1.7.0
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: 'generate-matrix/.nvmrc'
+
+      - name: Run npm install
+        working-directory: generate-matrix
+        run: npm install
+
+      - name: Run ncc build
+        working-directory: generate-matrix
+        run: ncc build src/index.ts
+
+      - name: Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "github-actions[bot]"
+          author_email: "github-actions[bot]@users.noreply.github.com"
+          committer_name: "github-actions[bot]"
+          committer_email: "github-actions[bot]@users.noreply.github.com"
