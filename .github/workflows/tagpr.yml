@@ -9,8 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1.7.0
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
 
-    - uses: Songmu/tagpr@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: Songmu/tagpr@v1
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
