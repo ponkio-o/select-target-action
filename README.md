@@ -102,7 +102,7 @@ jobs:
 The directories set in the key of the given label are merged and returned as an array.
 
 ### Deployment
-Assign a label to the Pull Request. Multiple lables can be assigned.
+Assign labels to the Pull Request. You can also select multiple labels.
 
 #### Example: `target:all`
 ![image](./images/deploy_to_all_job.png)
