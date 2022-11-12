@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: ncc build
+    name: Build
 
     steps:
       - name: Generate token
