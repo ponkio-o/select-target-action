@@ -5,5 +5,8 @@
   },
   "devDependencies": {
     "@types/node": "18.11.9"
+  },
+  "scripts": {
+    "build": "ncc build src/index.ts"
   }
 }
