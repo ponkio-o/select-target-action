@@ -1,8 +1,13 @@
 {
   "dependencies": {
-    "@actions/core": "1.10.0"
+    "@actions/core": "1.10.0",
+    "@vercel/ncc": "^0.34.0",
+    "typescript": "^4.8.4"
   },
   "devDependencies": {
     "@types/node": "18.11.9"
+  },
+  "scripts": {
+    "build": "ncc build src/index.ts"
   }
 }
