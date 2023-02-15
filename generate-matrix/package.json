@@ -8,6 +8,7 @@
     "@types/node": "18.13.0"
   },
   "scripts": {
-    "build": "ncc build src/index.ts"
+    "build": "ncc build src/index.ts",
+    "run": "ncc run src/index.ts"
   }
 }

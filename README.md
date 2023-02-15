@@ -29,7 +29,7 @@ The config file name or directory can be specified, but `.deploy_target.json` is
 #### CUI
 If the `jq` and `gh` commands are installed, the following commands are useful.
 ```bash
-export REPO=ponkio-o/select-target-action
+export REPO=<OWNER>/<REPO_NAME>
 export COLOR=5319E7
 cat .deploy_target.json | jq -r 'keys | .[]' | xargs -I @ gh label create @ --color $COLOR --repo $REPO
 ```
@@ -112,6 +112,19 @@ Assign labels to the Pull Request. You can also select multiple labels.
 
 #### Example: `target:all` & `target:staging`
 ![image](./images/deploy_to_all_job.png)
+
+### Default Target
+If you have directories that you want to run by default, you can set them to the "default" key. It can be used in conjunction with other labels, and if valid labels are selected, it will take precedence.
+
+```json
+{
+    "default" : [
+        "envs/development",
+        "envs/staging",
+        "envs/production"
+    ]
+}
+```
 
 ### Inputs
 All inputs are optional.
