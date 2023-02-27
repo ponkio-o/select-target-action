@@ -135,6 +135,11 @@ All inputs are optional.
 
 ### Outputs
 The working directory outputs as an array.
+|Name     |Description                                   |
+|---------|----------------------------------------------|
+|`targets`|The working directories are output as an array|
+
+Example:
 ```bash
-["envs/dev","envs/stg","envs/prod"]
+["envs/development","envs/staging","envs/production"]
 ```
