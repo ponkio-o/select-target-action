@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      workdir: ${{ steps.set_matrix.outputs.matrix-workdir }}
+      targets: ${{ steps.select_target.outputs.targets }}
 
     steps:
       - name: checkout
@@ -83,7 +83,7 @@ jobs:
 
     strategy:
       matrix:
-        workdir: ${{fromJson(needs.set-matrix.outputs.workdir)}}
+        target: ${{fromJson(needs.set-matrix.outputs.targets)}}
 
     steps:
       - name: Checkout
@@ -93,7 +93,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform plan
-        working-directory: ${{ matrix.workdir }}
+        working-directory: ${{ matrix.target }}
         run: terraform plan -input=false -no-color
 ...
 ```
