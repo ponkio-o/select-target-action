@@ -61,29 +61,29 @@ on:
       - main
 
 jobs:
-  set-matrix:
-    name: Set matrix job
+  select_target:
+    name: Select target
     runs-on: ubuntu-latest
 
     outputs:
       targets: ${{ steps.select_target.outputs.targets }}
 
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set matrix
-        id: set_matrix
+      - name: Select target
+        id: select_target
         uses: ponkio-o/select-target-action@main
 
   plan:
-    needs: [set-matrix]
+    needs: [select_target]
     name: Plan
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        target: ${{fromJson(needs.set-matrix.outputs.targets)}}
+        target: ${{fromJson(needs.select_target.outputs.targets)}}
 
     steps:
       - name: Checkout
