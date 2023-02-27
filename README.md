@@ -66,14 +66,14 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      targets: ${{ steps.select_target.outputs.targets }}
+      targets: ${{ steps.sta.outputs.targets }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Select target
-        id: select_target
+        id: sta
         uses: ponkio-o/select-target-action@main
 
   plan:
