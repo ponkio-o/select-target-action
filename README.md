@@ -61,29 +61,29 @@ on:
       - main
 
 jobs:
-  set-matrix:
-    name: Set matrix job
+  select_target:
+    name: Select target
     runs-on: ubuntu-latest
 
     outputs:
-      workdir: ${{ steps.set_matrix.outputs.matrix-workdir }}
+      targets: ${{ steps.sta.outputs.targets }}
 
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set matrix
-        id: set_matrix
+      - name: Select target
+        id: sta
         uses: ponkio-o/select-target-action@main
 
   plan:
-    needs: [set-matrix]
+    needs: [select_target]
     name: Plan
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        workdir: ${{fromJson(needs.set-matrix.outputs.workdir)}}
+        target: ${{fromJson(needs.select_target.outputs.targets)}}
 
     steps:
       - name: Checkout
@@ -93,7 +93,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform plan
-        working-directory: ${{ matrix.workdir }}
+        working-directory: ${{ matrix.target }}
         run: terraform plan -input=false -no-color
 ...
 ```
@@ -135,6 +135,11 @@ All inputs are optional.
 
 ### Outputs
 The working directory outputs as an array.
+|Name     |Description                                   |
+|---------|----------------------------------------------|
+|`targets`|The working directories are output as an array|
+
+Example:
 ```bash
-["envs/dev","envs/stg","envs/prod"]
+["envs/development","envs/staging","envs/production"]
 ```

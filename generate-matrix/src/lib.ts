@@ -10,32 +10,33 @@ function getLabels(): string[] {
     return labels;
 }
 
-export function getWorkDir(configPath: string): string[] {
+export function getTargets(configPath: string): string[] {
     const labels = getLabels();
     const configData = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
     const defaultTargetKey = 'default'
 
-    let workDirs = new Array();
+    let targets = new Array();
     for (var idx in labels) {
         let key = labels[idx];
         for (var i in configData[key]) {
-            workDirs.push(configData[key][i])
+            targets.push(configData[key][i])
         }
     }
 
-    if (workDirs.length == 0) {
+    // If targets don't exist, use default targets
+    if (targets.length == 0) {
         if (configData[defaultTargetKey] != undefined && configData[defaultTargetKey].length != 0) {
             core.info("Use default target")
-            workDirs = configData[defaultTargetKey]
+            targets = configData[defaultTargetKey]
         } else {
-            core.debug(`workDirs: ${String(workDirs)}`)
+            core.debug(`targets: ${String(targets)}`)
             core.debug(`labels: ${String(labels)}`)
             core.setFailed("Select labels or set default target. See  https://github.com/ponkio-o/select-target-action/blob/main/README.md#default-target");
         }
     }
 
-    // merge working directories
-    let set = new Set(workDirs)
+    // Merge working directories
+    let set = new Set(targets)
     let setToArr = Array.from(set)
 
     return setToArr;
