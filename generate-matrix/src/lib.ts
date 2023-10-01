@@ -2,18 +2,18 @@ import * as fs from 'fs';
 import * as core from '@actions/core';
 
 const defaultTargetKey = 'default'
+const labelsFileName = 'labels.txt'
+const labelsFilePath = process.env.CI_INFO_TEMP_DIR
 
 export function getTargets(configPath: string): string[] {
-    const labels = getLabels();
+    const labels = getLabels(labelsFileName, labelsFilePath);
     const configData = getConfigData(configPath)
 
     return parseConfigData(labels, configData);
 }
 
-export function getLabels(): string[] {
-    const labelsFileName = 'labels.txt'
-    const labelsFilePath = process.env.CI_INFO_TEMP_DIR
-    let r = fs.readFileSync(labelsFilePath + "/" + labelsFileName).toString().split(/\r?\n/).filter(Boolean);
+export function getLabels(file: string, path: string): string[] {
+    let r = fs.readFileSync(path + "/" + file).toString().split(/\r?\n/).filter(Boolean);
     let labels = Object.values(r)
 
     return labels;
