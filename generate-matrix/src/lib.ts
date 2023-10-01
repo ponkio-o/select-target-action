@@ -1,7 +1,16 @@
 import * as fs from 'fs';
 import * as core from '@actions/core';
 
-function getLabels(): string[] {
+const defaultTargetKey = 'default'
+
+export function getTargets(configPath: string): string[] {
+    const labels = getLabels();
+    const configData = getConfigData(configPath)
+
+    return parseConfigData(labels, configData);
+}
+
+export function getLabels(): string[] {
     const labelsFileName = 'labels.txt'
     const labelsFilePath = process.env.CI_INFO_TEMP_DIR
     let r = fs.readFileSync(labelsFilePath + "/" + labelsFileName).toString().split(/\r?\n/).filter(Boolean);
@@ -10,11 +19,11 @@ function getLabels(): string[] {
     return labels;
 }
 
-export function getTargets(configPath: string): string[] {
-    const labels = getLabels();
-    const configData = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
-    const defaultTargetKey = 'default'
+export function getConfigData(configPath: string): any {
+    return JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+}
 
+export function parseConfigData(labels: string[], configData: any): string[] {
     let targets = new Array();
     for (var idx in labels) {
         let key = labels[idx];
