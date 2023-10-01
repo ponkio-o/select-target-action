@@ -2839,6 +2839,12 @@ var core = __nccwpck_require__(186);
 ;// CONCATENATED MODULE: ./src/lib.ts
 
 
+const defaultTargetKey = 'default';
+function getTargets(configPath) {
+    const labels = getLabels();
+    const configData = getConfigData(configPath);
+    return parseConfigData(labels, configData);
+}
 function getLabels() {
     const labelsFileName = 'labels.txt';
     const labelsFilePath = process.env.CI_INFO_TEMP_DIR;
@@ -2846,10 +2852,10 @@ function getLabels() {
     let labels = Object.values(r);
     return labels;
 }
-function getTargets(configPath) {
-    const labels = getLabels();
-    const configData = JSON.parse(external_fs_.readFileSync(configPath, 'utf-8'));
-    const defaultTargetKey = 'default';
+function getConfigData(configPath) {
+    return JSON.parse(external_fs_.readFileSync(configPath, 'utf-8'));
+}
+function parseConfigData(labels, configData) {
     let targets = new Array();
     for (var idx in labels) {
         let key = labels[idx];
