@@ -2840,15 +2840,15 @@ var core = __nccwpck_require__(186);
 
 
 const defaultTargetKey = 'default';
+const labelsFileName = 'labels.txt';
+const labelsFilePath = process.env.CI_INFO_TEMP_DIR;
 function getTargets(configPath) {
-    const labels = getLabels();
+    const labels = getLabels(labelsFileName, labelsFilePath);
     const configData = getConfigData(configPath);
     return parseConfigData(labels, configData);
 }
-function getLabels() {
-    const labelsFileName = 'labels.txt';
-    const labelsFilePath = process.env.CI_INFO_TEMP_DIR;
-    let r = external_fs_.readFileSync(labelsFilePath + "/" + labelsFileName).toString().split(/\r?\n/).filter(Boolean);
+function getLabels(file, path) {
+    let r = external_fs_.readFileSync(path + "/" + file).toString().split(/\r?\n/).filter(Boolean);
     let labels = Object.values(r);
     return labels;
 }
