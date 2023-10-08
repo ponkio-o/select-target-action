@@ -1,5 +1,5 @@
 # select-target-action
-Configure the matrix job directory in GitHub Label.
+Configure the matrix job directory settings using GitHub labels.
 
 ## Setup
 ### 1. Create configuration file
