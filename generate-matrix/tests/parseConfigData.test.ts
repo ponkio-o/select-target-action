@@ -97,15 +97,3 @@ test("Check if invalid labels are skipped", () => {
     const result = parseConfigData(labels, data);
     expect(result).toEqual(["envs/production"]);
 });
-
-test("Check if invalid labels are skipped", () => {
-    const labels: string[] = ["target:invalid", "target:production"]
-    const data =
-    {
-        "target:production": [
-            "envs/production"
-        ]
-    }
-    const result = parseConfigData(labels, data);
-    expect(result).toEqual(["envs/production"]);
-});
