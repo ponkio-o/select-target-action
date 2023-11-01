@@ -19,6 +19,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - uses: Songmu/tagpr@v1
+      - name: Install aqua
+        uses: aquaproj/aqua-installer@v2.1.2
+        with:
+          aqua_version: v2.16.0
+
+      - name: Run tagpr
+        run: tagpr
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
