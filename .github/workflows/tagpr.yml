@@ -22,7 +22,7 @@ jobs:
       - name: Install aqua
         uses: aquaproj/aqua-installer@v2.3.0
         with:
-          aqua_version: v2.21.3
+          aqua_version: v2.23.0
 
       - name: Run tagpr
         run: tagpr
