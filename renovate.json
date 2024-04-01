@@ -1,19 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
+    "config:recommended",
     "github>aquaproj/aqua-renovate-config#2.2.1",
     "schedule:monthly"
   ],
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": [
-        "^ci-info\\/action.yml$"
-      ],
+      "fileMatch": ["^ci-info\\/action.yml$"],
       "matchStringsStrategy": "any",
-      "matchStrings": [
-        "CI_INFO_VERSION=(?<currentValue>.*)"
-      ],
+      "matchStrings": ["CI_INFO_VERSION=(?<currentValue>.*)"],
       "extractVersionTemplate": "^v(?<version>.*)$",
       "depNameTemplate": "suzuki-shunsuke/ci-info",
       "datasourceTemplate": "github-tags"
