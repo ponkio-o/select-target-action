@@ -8,6 +8,6 @@
 #   - all
 registries:
 - type: standard
-  ref: v4.127.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v4.155.1 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: Songmu/tagpr@v1.2.0
