@@ -7,6 +7,10 @@ on:
 jobs:
   tagpr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: read
 
     steps:
       - name: Generate token
